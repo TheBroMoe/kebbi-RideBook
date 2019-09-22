@@ -5,6 +5,9 @@ public class Comment extends RideAttribute {
         super(input);
 
         this.setAttributePattern("^.{0,20}$");
+
+        this.verifyInput();
+
     }
 
     @Override

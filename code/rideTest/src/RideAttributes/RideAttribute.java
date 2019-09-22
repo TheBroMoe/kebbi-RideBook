@@ -22,6 +22,7 @@ public abstract class RideAttribute {
     // Constructor
     public RideAttribute(String input){
         this.input = input;
+
     }
 
     // Getters and Setters

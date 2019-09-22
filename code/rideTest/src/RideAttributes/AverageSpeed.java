@@ -6,6 +6,8 @@ public class AverageSpeed extends RideAttribute {
 
         this.setAttributePattern("^[1-9]\\d*(\\.\\d+)?$");
 
+        this.verifyInput();
+
     }
 
     @Override

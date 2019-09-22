@@ -5,6 +5,9 @@ public class Title extends RideAttribute {
         super(input);
 
         this.setAttributePattern("^.{1,20}$");
+
+        this.verifyInput();
+
     }
 
     @Override

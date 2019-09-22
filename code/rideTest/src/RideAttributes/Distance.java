@@ -7,6 +7,9 @@ public class Distance extends RideAttribute {
         super(input);
 
         this.setAttributePattern("^[1-9]\\d*(\\.\\d+)?$");
+
+        this.verifyInput();
+
     }
 
     @Override

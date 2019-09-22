@@ -6,6 +6,8 @@ public class AverageCadence extends RideAttribute {
 
         this.setAttributePattern("^[0-9]*[1-9][0-9]*$");
 
+        this.verifyInput();
+
     }
 
     @Override

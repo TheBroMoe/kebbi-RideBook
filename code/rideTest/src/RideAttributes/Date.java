@@ -19,6 +19,8 @@ public class Date  extends  RideAttribute{
 
         this.initialize_dateFormat();
 
+        this.verifyInput();
+
     }
 
     private  void initialize_dateFormat(){
