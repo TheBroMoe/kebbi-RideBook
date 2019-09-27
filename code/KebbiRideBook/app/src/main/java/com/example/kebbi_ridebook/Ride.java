@@ -1,5 +1,8 @@
 package com.example.kebbi_ridebook;
-import com.example.kebbi_ridebook.RideAttributes.*;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * The Ride Class encapsulates a ride and it's attributes
@@ -10,116 +13,102 @@ import com.example.kebbi_ridebook.RideAttributes.*;
  * @since   2019-9-18
  */
 
-public class Ride {
+public class Ride implements Serializable {
 
     // Attributes
-    private String id;
-    private Title title;
-    private Date date;
-    private Time time;
+    private String title;
 
-    private Distance distance;
-    private float distanceFloat;
 
-    private AverageSpeed averageSpeed;
-    private float averageSpeedFloat;
+    private String date;
+    private String time;
 
-    private AverageCadence averageCadence;
-    private int averageCadenceInt;
+    private double distance;
+    private double averageSpeed;
+    private int averageCadence;
 
-    private Comment comment;
+    private String comment;
 
-    // Constructor
-    public Ride(String id){
-        this.id = id;
+
+    public Ride(){
+        this.date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        this.time = new SimpleDateFormat("HH:mm").format(new Date());
+
+        this.title = "New Ride";
+        this.comment = "";
+
+        this.distance = 0;
+        this.averageSpeed = 0;
+        this.averageSpeed = 0;
+    }
+
+    public Ride(String title, String date, String time, double distance, double averageSpeed, int averageCadence, String comment) {
+        this.title = title;
+        this.date = date;
+        this.time = time;
+        this.distance = distance;
+        this.averageSpeed = averageSpeed;
+        this.averageCadence = averageCadence;
+        this.comment = comment;
+
     }
 
     // Getters and Setters
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Title getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(Title title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    public void setDate(String date) { this.date = date; }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public Distance getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(Distance distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public AverageSpeed getAverageSpeed() {
+    public double getAverageSpeed() {
         return averageSpeed;
     }
 
-    public void setAverageSpeed(AverageSpeed averageSpeed) {
+    public void setAverageSpeed(double averageSpeed) {
         this.averageSpeed = averageSpeed;
     }
 
-    public AverageCadence getAverageCadence() {
+    public int getAverageCadence() {
         return averageCadence;
     }
 
-    public void setAverageCadence(AverageCadence averageCadence) {
+    public void setAverageCadence(int averageCadence) {
         this.averageCadence = averageCadence;
     }
 
-    public Comment getComment() {
+    public String getComment() {
         return comment;
     }
 
-    public void setComment(Comment comment) {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 
-    public float getDistanceFloat() {
-        return distanceFloat;
-    }
 
-    public void setDistanceFloat(float distanceFloat) {
-        this.distanceFloat = distanceFloat;
-    }
 
-    public float getAverageSpeedFloat() {
-        return averageSpeedFloat;
-    }
 
-    public void setAverageSpeedFloat(float averageSpeedFloat) {
-        this.averageSpeedFloat = averageSpeedFloat;
-    }
-
-    public int getAverageCadenceInt() {
-        return averageCadenceInt;
-    }
-
-    public void setAverageCadenceInt(int averageCadenceInt) {
-        this.averageCadenceInt = averageCadenceInt;
-    }
 }

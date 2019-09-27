@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <EditText
+        android:id="@+id/title_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Title"
+        android:inputType="textPersonName"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/date_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ride Date yyyy-mm-dd"
+        android:inputType="date"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/time_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Ride Time hh:mm"
+        android:inputType="time"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/distance_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Distance (km)"
+        android:inputType="numberDecimal"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/speed_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Average Speed (km/h)"
+        android:inputType="numberDecimal"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/cadence_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Average Cadence (revs/min)"
+        android:inputType="number"
+        android:digits="0123456789."
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <EditText
+        android:id="@+id/comment_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Comment (optional"
+        android:inputType="textMultiLine"
+        android:lines="2"
+        android:background="@android:color/transparent"
+        >
+    </EditText>
+
+    <Button
+        android:id="@+id/confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        />
+
+    <Button
+        android:id="@+id/cancel_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
+</LinearLayout>

@@ -5,32 +5,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="RideBook"
+        android:fontFamily="serif-monospace"
+        android:textColor="@color/colorAccent"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        />
 
     <ListView
         android:id="@+id/ride_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="7"
         >
 
+
     </ListView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center|bottom"
+        android:gravity="bottom|end"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/new_ride_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:onClick="newRide"
-            android:text="New Ride" />
-
+            android:fontFamily="sans-serif-black"
+            android:onClick="rideEditor"
+            android:text="New Ride"
+            android:textSize="20sp" />
     </LinearLayout>
 
 
