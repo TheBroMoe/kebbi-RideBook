@@ -28,12 +28,12 @@ public class RideDetailActivity extends AppCompatActivity {
 
         if (ride != null) {
             title.setText(ride.getTitle());
-            date.setText(ride.getDate());
-            time.setText(ride.getTime());
-            distance.setText(String.valueOf(ride.getDistance()));
-            speed.setText(String.valueOf(ride.getAverageSpeed()));
-            cadence.setText(String.valueOf(ride.getAverageCadence()));
-            comment.setText(ride.getComment());
+            date.setText(String.format("Ride Date: %s", ride.getDate()));
+            time.setText(String.format("Time of Ride: %s", ride.getTime()));
+            distance.setText(String.format("Ride Distance: %1$,.2f km", ride.getDistance()));
+            speed.setText(String.format("Average Speed: %1$,.2f km/h", ride.getAverageSpeed()));
+            cadence.setText(String.format("Average Cadence: %d revs/min", ride.getAverageCadence()));
+            comment.setText(String.format("Comment:\n%s", ride.getComment()));
         }else{
             System.out.println("Something didnt work :(");
         }

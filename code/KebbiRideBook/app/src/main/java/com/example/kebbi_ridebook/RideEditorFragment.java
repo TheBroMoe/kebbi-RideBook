@@ -3,15 +3,20 @@ package com.example.kebbi_ridebook;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RideEditorFragment extends DialogFragment {
 
@@ -26,11 +31,28 @@ public class RideEditorFragment extends DialogFragment {
     private EditText cadenceName;
     private EditText commentName;
 
+    private boolean rideExists;
+
     // Constructor for Adding New Rides
-//    public RideEditorFragment(){this.ride = new Ride();}
-//
-//    // Constructor for Editing Existing Rides
-//    public RideEditorFragment(Ride ride){this.ride = ride;}
+    public RideEditorFragment(){
+        this.rideExists = false;
+        this.ride = new Ride();
+    }
+
+    // Constructor for Editing Existing Rides
+    public RideEditorFragment(Ride ride){
+        this.ride = ride;
+        this.rideExists = true;
+
+    }
+
+    public boolean isExistingRide() {
+        return rideExists;
+    }
+
+    public void setRideExists(boolean rideExists) {
+        this.rideExists = rideExists;
+    }
 
     public interface OnFragmentInteractionListener {
         void onOkPressed(Ride newRide);
@@ -59,29 +81,55 @@ public class RideEditorFragment extends DialogFragment {
         cadenceName = view.findViewById((R.id.cadence_input));
         commentName = view.findViewById((R.id.comment_input));
 
+
+
         Button confirmButton = view.findViewById(R.id.confirm_button);
         Button cancelButton = view.findViewById(R.id.cancel_button);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder
                 .setView(view)
-                .setTitle("New Ride");
+                .setTitle(String.format("Add/Edit %s", ride.getTitle()));
+        // populate fields if ride exists
+        if(this.isExistingRide()){
+            titleName.setText(ride.getTitle(), TextView.BufferType.EDITABLE);
+            dateName.setText(ride.getDate(), TextView.BufferType.EDITABLE);
+            timeName.setText(ride.getTime());
+            distanceName.setText(String.valueOf(ride.getDistance()));
+            speedName.setText(String.valueOf(ride.getAverageSpeed()));
+            cadenceName.setText(String.valueOf(ride.getAverageCadence()));
+            commentName.setText(ride.getComment());
 
+        }
         final AlertDialog dialog = builder.create();
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = titleName.getText().toString();
-                String date = dateName.getText().toString();
-                String time = timeName.getText().toString();
-                double distance = Double.parseDouble(distanceName.getText().toString());
-                double speed = Double.parseDouble(speedName.getText().toString());
-                int cadence = Integer.parseInt(cadenceName.getText().toString());
-                String comment = commentName.getText().toString();
-                listener.onOkPressed(new Ride(title, date, time, distance, speed, cadence, comment));
 
-                dialog.dismiss();
+                EditText[] editTextFields = {titleName, dateName, timeName,
+                        distanceName, speedName, cadenceName};
+
+                ArrayList<EditText> inputFields = new ArrayList<>();
+
+                inputFields.addAll(Arrays.asList(editTextFields));
+
+                boolean inputIsValid = verifyRide(inputFields);
+
+                if(inputIsValid){
+                    ride.setTitle(titleName.getText().toString());
+                    ride.setDate(dateName.getText().toString());
+                    ride.setTime(timeName.getText().toString());
+                    ride.setDistance(Double.parseDouble(distanceName.getText().toString()));
+                    ride.setAverageSpeed(Double.parseDouble(speedName.getText().toString()));
+                    ride.setAverageCadence(Integer.parseInt(cadenceName.getText().toString()));
+                    ride.setComment(commentName.getText().toString());
+
+                    listener.onOkPressed(ride);
+
+                    dialog.dismiss();
+                }
+
 
             }
         });
@@ -95,5 +143,20 @@ public class RideEditorFragment extends DialogFragment {
 
         return dialog;
 
+    }
+
+    public boolean verifyRide(ArrayList<EditText> editTexts){
+        boolean isValid = true;
+        // Iterate EditText Input
+        for (int i=0; i < editTexts.size(); i++){
+            EditText editText = editTexts.get(i);
+            // Check if EditText is empty
+            if (editText.getText().toString().isEmpty()){
+                editText.setBackgroundColor(Color.RED);  // Red Background
+                editText.getBackground().setAlpha(25);  // Slightly Fade
+                isValid = false;  // No longer isValid
+            }
+        }
+        return isValid;
     }
 }
