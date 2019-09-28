@@ -2,6 +2,7 @@ package com.example.kebbi_ridebook;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,5 +39,9 @@ public class RideDetailActivity extends AppCompatActivity {
             System.out.println("Something didnt work :(");
         }
 
+    }
+
+    public void returnAction(View view) {
+        finish();
     }
 }

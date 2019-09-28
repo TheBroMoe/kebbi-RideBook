@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
         rideAdapter = new RideList(this, rideDataList);
 
         rideList.setAdapter(rideAdapter);
-        
+
+        rideAdapter.add(new Ride());
+
         rideList.setOnItemClickListener(this);
 
         updateTotalDistance();
