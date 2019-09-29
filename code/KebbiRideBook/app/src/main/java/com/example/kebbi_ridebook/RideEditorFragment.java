@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +55,8 @@ public class RideEditorFragment extends DialogFragment {
 
     public interface OnFragmentInteractionListener {
         void onOkPressed(Ride newRide);
+
+        void onCancelPressed();
     }
 
     @Override
@@ -92,8 +93,8 @@ public class RideEditorFragment extends DialogFragment {
                 .setTitle(String.format("Add/Edit %s", ride.getTitle()));
         // populate fields if ride exists
         if(this.isExistingRide()){
-            titleName.setText(ride.getTitle(), TextView.BufferType.EDITABLE);
-            dateName.setText(ride.getDate(), TextView.BufferType.EDITABLE);
+            titleName.setText(ride.getTitle());
+            dateName.setText(ride.getDate());
             timeName.setText(ride.getTime());
             distanceName.setText(String.valueOf(ride.getDistance()));
             speedName.setText(String.valueOf(ride.getAverageSpeed()));
@@ -137,6 +138,7 @@ public class RideEditorFragment extends DialogFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                listener.onCancelPressed();
                 dialog.dismiss();
             }
         });
