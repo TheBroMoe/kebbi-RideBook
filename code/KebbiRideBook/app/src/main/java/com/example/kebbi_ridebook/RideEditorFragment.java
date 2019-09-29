@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.kebbi_ridebook.userinterface.UserInterfaceFragment;
+
 public class RideEditorFragment extends DialogFragment {
 
     private UserInterfaceFragment uiFragment;

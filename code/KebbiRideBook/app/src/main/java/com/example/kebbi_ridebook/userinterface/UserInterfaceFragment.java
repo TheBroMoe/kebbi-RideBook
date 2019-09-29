@@ -1,18 +1,19 @@
-package com.example.kebbi_ridebook;
+package com.example.kebbi_ridebook.userinterface;
 
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.kebbi_ridebook.Ride;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UserInterfaceFragment {
+public class UserInterfaceFragment extends UserInterface {
 
-    private Ride ride;
 
     private boolean rideExists;
     private boolean valid;
@@ -42,14 +43,6 @@ public class UserInterfaceFragment {
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public Ride getRide() {
-        return ride;
-    }
-
-    public void setRide(Ride ride) {
-        this.ride = ride;
     }
 
     public AlertDialog getDialog() {

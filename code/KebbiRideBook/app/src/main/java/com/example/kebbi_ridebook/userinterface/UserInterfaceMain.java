@@ -1,10 +1,12 @@
-package com.example.kebbi_ridebook;
+package com.example.kebbi_ridebook.userinterface;
 
 import android.widget.TextView;
 
+import com.example.kebbi_ridebook.Ride;
+
 import java.util.ArrayList;
 
-public class UserInterfaceMain {
+public class UserInterfaceMain extends UserInterface {
 
     private boolean editButtonPressed;
     private boolean deleteButtonPressed;
