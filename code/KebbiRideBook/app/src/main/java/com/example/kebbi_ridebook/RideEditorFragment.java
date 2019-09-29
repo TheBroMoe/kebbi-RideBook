@@ -3,7 +3,6 @@ package com.example.kebbi_ridebook;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class RideEditorFragment extends DialogFragment {
 
+    private UserInterfaceFragment uiFragment;
+
     private OnFragmentInteractionListener listener;
-    private Ride ride;
 
     private EditText titleName;
     private EditText dateName;
@@ -30,32 +27,21 @@ public class RideEditorFragment extends DialogFragment {
     private EditText cadenceName;
     private EditText commentName;
 
-    private boolean rideExists;
+
 
     // Constructor for Adding New Rides
     public RideEditorFragment(){
-        this.rideExists = false;
-        this.ride = new Ride();
+        this.uiFragment = new UserInterfaceFragment(new Ride(), false);
     }
 
     // Constructor for Editing Existing Rides
     public RideEditorFragment(Ride ride){
-        this.ride = ride;
-        this.rideExists = true;
+        this.uiFragment = new UserInterfaceFragment(ride,true);
 
-    }
-
-    public boolean isExistingRide() {
-        return rideExists;
-    }
-
-    public void setRideExists(boolean rideExists) {
-        this.rideExists = rideExists;
     }
 
     public interface OnFragmentInteractionListener {
         void onOkPressed(Ride newRide);
-
         void onCancelPressed();
     }
 
@@ -72,66 +58,40 @@ public class RideEditorFragment extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.activity_ride_editor, null);
+        this.uiFragment.setView(LayoutInflater.from(getActivity()).inflate(R.layout.activity_ride_editor, null));
 
-        titleName = view.findViewById((R.id.title_input));
-        dateName = view.findViewById((R.id.date_input));
-        timeName = view.findViewById((R.id.time_input));
-        distanceName = view.findViewById((R.id.distance_input));
-        speedName = view.findViewById((R.id.speed_input));
-        cadenceName = view.findViewById((R.id.cadence_input));
-        commentName = view.findViewById((R.id.comment_input));
+        this.initializeEditTexts();
 
+        Button confirmButton = this.uiFragment.getView().findViewById(R.id.confirm_button);
+        Button cancelButton = this.uiFragment.getView().findViewById(R.id.cancel_button);
 
-
-        Button confirmButton = view.findViewById(R.id.confirm_button);
-        Button cancelButton = view.findViewById(R.id.cancel_button);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         builder
-                .setView(view)
-                .setTitle(String.format("Add/Edit %s", ride.getTitle()));
-        // populate fields if ride exists
-        if(this.isExistingRide()){
-            titleName.setText(ride.getTitle());
-            dateName.setText(ride.getDate());
-            timeName.setText(ride.getTime());
-            distanceName.setText(String.valueOf(ride.getDistance()));
-            speedName.setText(String.valueOf(ride.getAverageSpeed()));
-            cadenceName.setText(String.valueOf(ride.getAverageCadence()));
-            commentName.setText(ride.getComment());
+                .setView(this.uiFragment.getView())
+                .setTitle(String.format("Add/Edit %s", this.uiFragment.getRide().getTitle()));
 
+        if(this.uiFragment.isRideExists()){
+            this.populateFields();
         }
-        final AlertDialog dialog = builder.create();
+
+        uiFragment.setDialog(builder.create());
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                EditText[] editTextFields = {titleName, dateName, timeName,
-                        distanceName, speedName, cadenceName};
+                uiFragment.validateRide(new EditText[]{titleName, dateName, timeName,
+                        distanceName, speedName, cadenceName, commentName});
 
-                ArrayList<EditText> inputFields = new ArrayList<>();
 
-                inputFields.addAll(Arrays.asList(editTextFields));
+                if(uiFragment.isValid()){
+                    createRide();
 
-                boolean inputIsValid = verifyRide(inputFields);
+                    listener.onOkPressed(uiFragment.getRide());
 
-                if(inputIsValid){
-                    ride.setTitle(titleName.getText().toString());
-                    ride.setDate(dateName.getText().toString());
-                    ride.setTime(timeName.getText().toString());
-                    ride.setDistance(Double.parseDouble(distanceName.getText().toString()));
-                    ride.setAverageSpeed(Double.parseDouble(speedName.getText().toString()));
-                    ride.setAverageCadence(Integer.parseInt(cadenceName.getText().toString()));
-                    ride.setComment(commentName.getText().toString());
-
-                    listener.onOkPressed(ride);
-
-                    dialog.dismiss();
+                    uiFragment.getDialog().dismiss();
                 }
-
-
             }
         });
 
@@ -139,26 +99,43 @@ public class RideEditorFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 listener.onCancelPressed();
-                dialog.dismiss();
+                uiFragment.getDialog().dismiss();
             }
         });
 
-        return dialog;
+        return uiFragment.getDialog();
 
     }
 
-    public boolean verifyRide(ArrayList<EditText> editTexts){
-        boolean isValid = true;
-        // Iterate EditText Input
-        for (int i=0; i < editTexts.size(); i++){
-            EditText editText = editTexts.get(i);
-            // Check if EditText is empty
-            if (editText.getText().toString().isEmpty()){
-                editText.setBackgroundColor(Color.RED);  // Red Background
-                editText.getBackground().setAlpha(25);  // Slightly Fade
-                isValid = false;  // No longer isValid
-            }
-        }
-        return isValid;
+    // Helper Functions
+    private void createRide() {
+        uiFragment.getRide().setTitle(titleName.getText().toString());
+        uiFragment.getRide().setDate(dateName.getText().toString());
+        uiFragment.getRide().setTime(timeName.getText().toString());
+        uiFragment.getRide().setDistance(Double.parseDouble(distanceName.getText().toString()));
+        uiFragment.getRide().setAverageSpeed(Double.parseDouble(speedName.getText().toString()));
+        uiFragment.getRide().setAverageCadence(Integer.parseInt(cadenceName.getText().toString()));
+        uiFragment.getRide().setComment(commentName.getText().toString());
     }
+
+    private void populateFields() {
+        titleName.setText(uiFragment.getRide().getTitle());
+        dateName.setText(uiFragment.getRide().getDate());
+        timeName.setText(uiFragment.getRide().getTime());
+        distanceName.setText(String.valueOf(uiFragment.getRide().getDistance()));
+        speedName.setText(String.valueOf(uiFragment.getRide().getAverageSpeed()));
+        cadenceName.setText(String.valueOf(uiFragment.getRide().getAverageCadence()));
+        commentName.setText(uiFragment.getRide().getComment());
+    }
+
+    private void initializeEditTexts() {
+        titleName = this.uiFragment.getView().findViewById((R.id.title_input));
+        dateName = this.uiFragment.getView().findViewById((R.id.date_input));
+        timeName = this.uiFragment.getView().findViewById((R.id.time_input));
+        distanceName = this.uiFragment.getView().findViewById((R.id.distance_input));
+        speedName = this.uiFragment.getView().findViewById((R.id.speed_input));
+        cadenceName = this.uiFragment.getView().findViewById((R.id.cadence_input));
+        commentName = this.uiFragment.getView().findViewById((R.id.comment_input));
+    }
+
 }

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        this.uiMain.setCurrentPostion(position);
+        this.uiMain.setCurrentPosition(position);
 
         if (this.uiMain.isEditButtonPressed()){
             this.edit();
@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
         rideAdapter = new RideList(this, rideDataList);
         rideList.setAdapter(rideAdapter);
         rideList.setOnItemClickListener(this);
-
-        rideAdapter.add(new Ride());
 
         this.uiMain.updateTotalDistance(rideDataList, totalDistance);
 
@@ -95,12 +93,12 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
     // Helper Functions
 
     private void edit() {
-        new RideEditorFragment(rideDataList.get(this.uiMain.getCurrentPostion())).show(getSupportFragmentManager(), "EDIT_CITY");
+        new RideEditorFragment(rideDataList.get(this.uiMain.getCurrentPosition())).show(getSupportFragmentManager(), "EDIT_CITY");
     }
 
     private void delete() {
         if (!rideDataList.isEmpty()) {
-            rideDataList.remove(this.uiMain.getCurrentPostion());
+            rideDataList.remove(this.uiMain.getCurrentPosition());
             rideList.invalidateViews();
             this.uiMain.updateTotalDistance(rideDataList, totalDistance);
             this.uiMain.clearButtonPresses();
@@ -110,14 +108,14 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
 
     private void loadDetailActivity() {
         Intent intent = new Intent(this, RideDetailActivity.class);
-        Ride ride = rideDataList.get(this.uiMain.getCurrentPostion());
+        Ride ride = rideDataList.get(this.uiMain.getCurrentPosition());
+        this.uiMain.resetCurrentPosition();
         intent.putExtra("RIDE", ride);
         startActivity(intent);
-        this.uiMain.resetCurrentPosition();
     }
 
     private void editRide(Ride newRide) {
-        rideDataList.set(this.uiMain.getCurrentPostion(), newRide);
+        rideDataList.set(this.uiMain.getCurrentPosition(), newRide);
         rideAdapter.notifyDataSetChanged();
         this.uiMain.clearButtonPresses();
     }

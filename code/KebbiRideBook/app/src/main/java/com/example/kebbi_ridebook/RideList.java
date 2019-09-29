@@ -40,10 +40,11 @@ public class RideList extends ArrayAdapter<Ride> {
         TextView time = view.findViewById(R.id.time_textview);
         TextView distance = view.findViewById(R.id.distance_textview);
 
+        // Set title of Ride
         title.setText(ride.getTitle());
 
         // Set text to string distance
-        distance.setText(String.valueOf(ride.getDistance()));
+        distance.setText(String.format("%s km", String.valueOf(ride.getDistance())));
 
         // Set Date
         date.setText(ride.getDate());

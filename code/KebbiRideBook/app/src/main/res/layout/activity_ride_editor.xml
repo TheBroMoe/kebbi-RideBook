@@ -91,6 +91,7 @@
         android:id="@+id/confirm_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="confirmAction"
         android:text="Confirm"
         />
 
@@ -98,6 +99,7 @@
         android:id="@+id/cancel_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="cancelAction"
         android:text="Cancel" />
 
 </LinearLayout>
