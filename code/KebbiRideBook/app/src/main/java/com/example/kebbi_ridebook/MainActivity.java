@@ -37,9 +37,7 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
         if (this.uiMain.isEditButtonPressed()){
             this.edit();
         } else if(this.uiMain.isDeleteButtonPressed()){
-            if (!rideDataList.isEmpty()){
-                this.delete();
-            }
+            this.delete();
         } else {
             this.loadDetailActivity();
         }
@@ -101,11 +99,13 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
     }
 
     private void delete() {
-        rideDataList.remove(this.uiMain.getCurrentPostion());
-        rideList.invalidateViews();
-        this.uiMain.updateTotalDistance(rideDataList, totalDistance);
-        this.uiMain.clearButtonPresses();
-        this.uiMain.resetCurrentPosition();
+        if (!rideDataList.isEmpty()) {
+            rideDataList.remove(this.uiMain.getCurrentPostion());
+            rideList.invalidateViews();
+            this.uiMain.updateTotalDistance(rideDataList, totalDistance);
+            this.uiMain.clearButtonPresses();
+            this.uiMain.resetCurrentPosition();
+        }
     }
 
     private void loadDetailActivity() {
@@ -125,6 +125,5 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
     private void addRide(Ride newRide) {
         rideAdapter.add(newRide);
     }
-
 
 }
