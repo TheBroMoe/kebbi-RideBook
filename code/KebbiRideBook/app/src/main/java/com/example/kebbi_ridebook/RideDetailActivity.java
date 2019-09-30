@@ -1,3 +1,12 @@
+/**
+ * The RideDetail Activity is the details screen shown when a user clicks on a ride
+ * from RideList
+ *
+ * Acknowledgements:
+ *  Using Serializable to pass objects between activities: https://stackoverflow.com/a/2736612
+ *  Formatting doubles to strings: https://stackoverflow.com/q/16667495
+ *  Using finish() for returning to mainActivity: https://stackoverflow.com/a/10862977
+ */
 package com.example.kebbi_ridebook;
 
 import android.content.Intent;

@@ -1,3 +1,9 @@
+/**
+ * UserInterfaceFragment is a subclass of UserInterface specialized for the MainActivity
+ * Class
+ *
+ * */
+
 package com.example.kebbi_ridebook.userinterface;
 
 import android.widget.TextView;

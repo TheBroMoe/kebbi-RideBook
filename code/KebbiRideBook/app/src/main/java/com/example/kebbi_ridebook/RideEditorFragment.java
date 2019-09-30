@@ -1,3 +1,11 @@
+/**
+ * RideEditorFragment implements the DialogFragment to create an add/edit
+ * fragment for creating and updating rides
+ *
+ * Acknowledgements:
+ * Implementation of Fragment: Lab 3 Instructions - Fragments
+ * Populating EditText Boxes with text: https://stackoverflow.com/a/7321231
+ */
 package com.example.kebbi_ridebook;
 
 import android.app.AlertDialog;

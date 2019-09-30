@@ -1,3 +1,6 @@
+/**
+ * UserInterface is a base class used to encapsulate helper functions used by each activity
+ * */
 package com.example.kebbi_ridebook.userinterface;
 
 import com.example.kebbi_ridebook.Ride;

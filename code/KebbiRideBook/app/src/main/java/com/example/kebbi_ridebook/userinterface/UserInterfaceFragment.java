@@ -1,3 +1,11 @@
+/**
+ * UserInterfaceFragment is a subclass of UserInterface specialized for the RideEditorFragment
+ * Class
+ *
+ * Acknowledgements:
+ *  Setting background colors for EditTexts based on state: https://stackoverflow.com/a/18936728
+ * */
+
 package com.example.kebbi_ridebook.userinterface;
 
 import android.app.AlertDialog;

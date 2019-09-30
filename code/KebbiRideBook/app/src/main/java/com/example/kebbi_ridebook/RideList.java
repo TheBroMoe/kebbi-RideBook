@@ -1,3 +1,10 @@
+/**
+ * RideList is a CustomList used for the ListAdapter in the main activity
+ *
+ * Acknowledgements:
+ * Implementation of CustomList: Lab 3 Instructions - CustomListd
+ */
+
 package com.example.kebbi_ridebook;
 
 import android.content.Context;

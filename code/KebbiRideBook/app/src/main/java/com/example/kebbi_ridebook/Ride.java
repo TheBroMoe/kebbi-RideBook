@@ -1,17 +1,14 @@
+/**
+ * The Ride Class encapsulates a ride and it's attributes
+ * when a user creates a ride
+ *
+ */
 package com.example.kebbi_ridebook;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * The Ride Class encapsulates a ride and it's attributes
- * when a user creates a ride
- *
- * @author  Mohammad Kebbi
- * @version 1.0
- * @since   2019-9-18
- */
 
 public class Ride implements Serializable {
 
@@ -28,7 +25,7 @@ public class Ride implements Serializable {
 
     private String comment;
 
-
+    // Empty Constructor Called
     public Ride(){
         this.date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         this.time = new SimpleDateFormat("HH:mm").format(new Date());
@@ -41,6 +38,7 @@ public class Ride implements Serializable {
         this.averageSpeed = 0;
     }
 
+    // Constructor with all attributes given
     public Ride(String title, String date, String time, double distance, double averageSpeed, int averageCadence, String comment) {
         this.title = title;
         this.date = date;

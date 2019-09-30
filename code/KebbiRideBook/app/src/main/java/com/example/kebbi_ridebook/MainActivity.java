@@ -1,5 +1,12 @@
-package com.example.kebbi_ridebook;
+/**
+ * MainActivity implements main screen for RideBook
+ *
+ * Acknowledgements:
+ *  Creating a Gradient Background: https://howcreateit.com/programming/android-studio/how-to-set-gradient-background-color-in-android-studio/
+ *  Using Serializable to pass objects between activities: https://stackoverflow.com/a/2736612
+ * */
 
+package com.example.kebbi_ridebook;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements RideEditorFragmen
 
     }
 
+    // Implementing onItemClick for List Items
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         this.uiMain.setCurrentPosition(position);
