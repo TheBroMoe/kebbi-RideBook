@@ -1,0 +1,4 @@
+#Sat Sep 21 21:37:36 MDT 2019
+base.0=C\:\\Users\\mkebbi\\Documents\\coursework\\Fall_2019\\CMPUT301\\kebbi-RideBook\\code\\RideBookKebbi\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

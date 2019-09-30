@@ -35,6 +35,10 @@ public class RideDetailActivity extends AppCompatActivity {
 
     }
 
+    public void returnAction(View view) {
+        finish();
+    }
+
     private void getRideDetails() {
         Intent intent = getIntent();
         this.ride = (Ride) intent.getExtras().getSerializable("RIDE");
@@ -60,7 +64,4 @@ public class RideDetailActivity extends AppCompatActivity {
         comment = findViewById(R.id.comment_ride);
     }
 
-    public void returnAction(View view) {
-        finish();
-    }
 }
